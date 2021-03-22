@@ -26,7 +26,7 @@ if len(sys.argv) > 1:
     
 dataset = "Joint"
 if dataset == "Joint":
-    rst_file_name = "0320_2.rst" # Suggested for subevent
+    rst_file_name = "0321_0.rst" # Suggested for subevent
 elif dataset == "HiEve":
     rst_file_name = "0104_5.rst" # Not suggested for subevent
 elif dataset == "MATRES":
