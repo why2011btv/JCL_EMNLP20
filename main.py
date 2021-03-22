@@ -51,8 +51,8 @@ if debugging:
     space = {
         'downsample': 0.01,
         'learning_rate': 0.0000001,
-        'lambda_annoT': 1.0,
-        'lambda_annoH': 1.0,
+        'lambda_annoT': 2.0,
+        'lambda_annoH': 2.0,
         'lambda_transT': 1.0,
         'lambda_transH': 1.0,
         'lambda_cross': 1.0,

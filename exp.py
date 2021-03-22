@@ -264,6 +264,9 @@ class exp:
                 print("  F1: {0:.3f}".format(F1), file = self.file)
                 print("  Confusion Matrix", file = self.file)
                 print(CM, file = self.file)
+                msg = message(subject=eval_data + " Test Notice",
+                          text="Test results:\n" + "  P: {0:.3f}\n".format(P) + "  R: {0:.3f}\n".format(R) + "  F1: {0:.3f}".format(F1))
+                send(msg)  # and send it
             if not test:
                 if F1 > self.MATRES_best_micro_F1 or path.exists(self.MATRES_best_PATH) == False:
                     self.MATRES_best_micro_F1 = F1
@@ -287,6 +290,8 @@ class exp:
                 print("  rst:", file = self.file)
                 print(rst, file = self.file)
                 print("  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg), file = self.file)
+                msg = message(subject=eval_data + " Test Notice", text = "Test results:\n" + "  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg))
+                send(msg)  # and send it
             if not test:
                 if F1_PC_CP_avg > self.HiEve_best_F1 or path.exists(self.HiEve_best_PATH) == False:
                     self.HiEve_best_F1 = F1_PC_CP_avg
