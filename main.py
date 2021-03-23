@@ -66,8 +66,8 @@ if debugging:
         json.dump(space, config_file)
 else:
     space = {
-        'downsample': hp.uniform('downsample', 0.01, 0.2),
-        'learning_rate': hp.loguniform('learning_rate', np.log(0.00000001), np.log(0.000001)),
+        'downsample': hp.uniform('downsample', 0.01, 0.02),
+        'learning_rate': hp.loguniform('learning_rate', np.log(0.00000005), np.log(0.0000002)),
         'lambda_annoT': hp.uniform('lambda_annoT', 0.0, 1.0),
         'lambda_annoH': hp.uniform('lambda_annoH', 0.0, 1.0),
         'lambda_transT': hp.uniform('lambda_transT', 0.0, 1.0),
@@ -79,6 +79,8 @@ else:
         'roberta_hidden_size': 1024, #hp.quniform('roberta_hidden_size', 768, 1024, 1),
         'lstm_input_size': 768, #hp.quniform('lstm_input_size', 768, 1024, 1), # pre-trained word embeddings, roberta-base
     }
+    #with open("config/" + rst_file_name.replace("rst", "json"), 'w') as config_file:
+    #    json.dump(space, config_file)
     
 def count_parameters(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)

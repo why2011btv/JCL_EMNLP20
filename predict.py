@@ -18,22 +18,16 @@ from exp import *
 from data import *
 import json
 
-task = "subevent" # OR "temporal"
 ### Read command line parameters ###
 if len(sys.argv) > 1:
     input_file, task, dataset = sys.argv[1], sys.argv[2], sys.argv[3]
     
-dataset = "Joint" # OR "MATRES", "HiEve"
-rst_file_name = "0321_0.rst"
-"""
-Old version, not suggested
 if dataset == "Joint":
     rst_file_name = "0321_0.rst" # Suggested for subevent
 elif dataset == "HiEve":
     rst_file_name = "0104_5.rst" # Not suggested for subevent
 elif dataset == "MATRES":
     rst_file_name = "0104_3.rst" # Suggested for temporal
-"""    
 
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 cuda = torch.device('cuda')
@@ -66,7 +60,10 @@ for an_instance in input_list:
     test_set.append(to_append)
 test_dataloader = DataLoader(EventDataset(test_set), batch_size=batch_size, shuffle = False)
 
-print("loading model from " + HiEve_best_PATH + "...")
+if task == "temporal":
+    print("loading model from " + MATRES_best_PATH + "...")
+else:
+    print("loading model from " + HiEve_best_PATH + "...")
 model = roberta_mlp(num_classes, dataset, add_loss, params)
 model.to(cuda)
 if task == "temporal":
