@@ -141,6 +141,27 @@ def subword_id_getter(sent, e_start_char):
     #return roberta_subword_to_ID, id_lookup(roberta_subword_span, e_start_char)  # 0104_3.pt
     return roberta_subword_to_ID, id_lookup(roberta_subword_span, e_start_char) + 1 # 0321_0.pt
 
+def subword_id_getter_comma_split(comma_sep_sent, e_start_char):
+    """
+    A function for comma_split_sentence
+    Example: comma_sep_sent: "Bob hit Jacob ."
+             e_start_char: 4
+    Output: ([0, 3045, 478, 5747, 479, 2], 2)
+    """
+    roberta_subword_to_ID = [0]
+    comma_split_tokens = comma_sep_sent.split()
+    token_span = tokenized_to_origin_span(comma_sep_sent, comma_split_tokens)
+    start_char_to_subword_id = {}
+    for i in range(len(comma_split_tokens)):    
+        start_char_to_subword_id[token_span[i][0]] = len(roberta_subword_to_ID)
+        roberta_subword_to_ID.extend(tokenizer.encode(comma_split_tokens[i])[1:-1])
+    roberta_subword_to_ID.append(2)
+    try:
+        subword_id = start_char_to_subword_id[e_start_char]
+    except:
+        raise Exception('The provided event start char is wrong')
+    return roberta_subword_to_ID, subword_id
+
 # =========================
 #       KAIROS Reader
 # =========================
