@@ -25,13 +25,16 @@ if len(sys.argv) > 1:
     input_file, task, dataset = sys.argv[1], sys.argv[2], sys.argv[3]
     
 dataset = "Joint"
+rst_file_name = "0321_0.rst"
+"""
+Old version, not suggested
 if dataset == "Joint":
     rst_file_name = "0321_0.rst" # Suggested for subevent
 elif dataset == "HiEve":
     rst_file_name = "0104_5.rst" # Not suggested for subevent
 elif dataset == "MATRES":
     rst_file_name = "0104_3.rst" # Suggested for temporal
-    
+"""    
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 cuda = torch.device('cuda')
 epochs = 1

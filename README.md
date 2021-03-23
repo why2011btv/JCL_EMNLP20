@@ -76,11 +76,11 @@ Output will also be a json file under [output](https://github.com/why2011btv/Joi
 
 `<TASK>`: choose from "subevent" and "temporal"
 
-`<MODEL>`: choose from "MATRES", "HiEve", "Joint" (i.e., dataset on which the model was trained)
+`<MODEL>`: choose from "MATRES", "HiEve", "Joint" (i.e., dataset on which the model was trained, "Joint" is suggested)
 
 ### Example commands
 #### Command for predicting temporal relations
-`python predict.py example/temporal_example_input.json temporal MATRES`
+`python predict.py example/temporal_example_input.json temporal Joint`
 #### Command for predicting subevent relations
 `python predict.py example/subevent_example_input.json subevent Joint`
 

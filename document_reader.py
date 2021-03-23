@@ -138,8 +138,7 @@ def subword_id_getter(sent, e_start_char):
     Output: ([0, 3045, 478, 5747, 4, 2], 2)
     """
     roberta_subword_to_ID, roberta_subwords, roberta_subword_span, _ = RoBERTa_list(sent)
-    return roberta_subword_to_ID, id_lookup(roberta_subword_span, e_start_char) # 0104_3.pt
-    #return roberta_subword_to_ID, id_lookup(roberta_subword_span, e_start_char) + 1 # 0320_0.pt
+    return roberta_subword_to_ID, id_lookup(roberta_subword_span, e_start_char) + 1 # 0321_0.pt
 
 # =========================
 #       KAIROS Reader

@@ -21,7 +21,7 @@ def send(msg, server="smtp.gmail.com", port=587):
         # login to server
         smtp.login(email, pwd)
         # send notification to self
-        smtp.sendmail(email, email, msg.as_string())
+        smtp.sendmail(email, "why16gzl@seas.upenn.edu", msg.as_string())
         # disconnect from the server
         smtp.quit()
     except socket.gaierror:
