@@ -248,7 +248,7 @@ class exp:
                     numpyData = {"labels": "0 -- Parent-Child; 1 -- Child-Parent; 2 -- Coref; 3 -- NoRel", "array": y_logits}
                 json.dump(numpyData, outfile, cls=NumpyArrayEncoder)
             msg = message(subject=eval_data + " Prediction Notice",
-                          text="Predicted " + str(y_logits.shape[0] - 1) + " instances")
+                          text=self.dataset + "/" + self.model_name + " Predicted " + str(y_logits.shape[0] - 1) + " instances")
             send(msg)  # and send it
             return 0
         
@@ -265,7 +265,7 @@ class exp:
                 print("  Confusion Matrix", file = self.file)
                 print(CM, file = self.file)
                 msg = message(subject=eval_data + " Test Notice",
-                          text="Test results:\n" + "  P: {0:.3f}\n".format(P) + "  R: {0:.3f}\n".format(R) + "  F1: {0:.3f}".format(F1))
+                          text = self.dataset + "/" + self.model_name + " Test results:\n" + "  P: {0:.3f}\n".format(P) + "  R: {0:.3f}\n".format(R) + "  F1: {0:.3f}".format(F1))
                 send(msg)  # and send it
             if not test:
                 if F1 > self.MATRES_best_micro_F1 or path.exists(self.MATRES_best_PATH) == False:
@@ -290,7 +290,7 @@ class exp:
                 print("  rst:", file = self.file)
                 print(rst, file = self.file)
                 print("  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg), file = self.file)
-                msg = message(subject=eval_data + " Test Notice", text = "Test results:\n" + "  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg))
+                msg = message(subject=eval_data + " Test Notice", text = self.dataset + "/" + self.model_name + " Test results:\n" + "  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg))
                 send(msg)  # and send it
             if not test:
                 if F1_PC_CP_avg > self.HiEve_best_F1 or path.exists(self.HiEve_best_PATH) == False:
