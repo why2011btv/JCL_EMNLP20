@@ -49,8 +49,8 @@ with open(input_file) as f:
     input_list = json.load(f)
 test_set = []
 for an_instance in input_list:
-    x_sent, x_position = subword_id_getter_comma_split(an_instance["sent_1"], an_instance["e1_start_char"])
-    y_sent, y_position = subword_id_getter_comma_split(an_instance["sent_2"], an_instance["e2_start_char"])
+    x_sent, x_position = subword_id_getter_space_split(an_instance["sent_1"], an_instance["e1_start_char"])
+    y_sent, y_position = subword_id_getter_space_split(an_instance["sent_2"], an_instance["e2_start_char"])
     x_sent = padding(x_sent)
     y_sent = padding(y_sent)
     to_append = 0, 0, 0, \
