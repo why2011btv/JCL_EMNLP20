@@ -70,7 +70,7 @@ Input should be a json file that contains a list of dictionaries. Each dictionar
 Output will also be a json file under [output](https://github.com/why2011btv/JointConstrainedLearning/tree/master/output) folder. The output contains a dictionary with two key-value pairs; one is labels, the other is predicted probabilities.
 
 ### How to run 
-`python3 predict.py <INPUT_FILE> <TASK> <MODEL>`
+`python3 predict.py <INPUT_FILE> <TASK> <MODEL> <OUTPUT_FILE>`
 
 `<INPUT_FILE>`: a json file
 
@@ -78,11 +78,13 @@ Output will also be a json file under [output](https://github.com/why2011btv/Joi
 
 `<MODEL>`: choose from "MATRES", "HiEve", "Joint" (i.e., dataset on which the model was trained)
 
+`<OUTPUT_FILE>`: name for a json file
+
 ### Example commands
 #### Command for predicting temporal relations
-`python predict.py example/temporal_example_input.json temporal MATRES`
+`python predict.py example/temporal_example_input.json temporal MATRES predict_temporal.json`
 #### Command for predicting subevent relations
-`python predict.py example/subevent_example_input.json subevent Joint`
+`python predict.py example/subevent_example_input.json subevent Joint predict_subevent.json`
 
 #### [Link to pre-trained model](https://drive.google.com/drive/folders/1PyNAlNHY144pGsko9iYxwYlqf4ud0Lq1?usp=sharing)
 

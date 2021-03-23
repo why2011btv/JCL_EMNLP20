@@ -20,9 +20,9 @@ import json
 
 ### Read command line parameters ###
 if len(sys.argv) > 1:
-    input_file, task, dataset, f_out = sys.argv[1], sys.argv[2], sys.argv[3]
+    input_file, task, dataset, f_out = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
     
-f_out = "output/predict_" + task + ".json"
+f_out = "output/" + f_out
 if dataset == "Joint":
     rst_file_name = "0322_1.rst" # Suggested for subevent
 elif dataset == "HiEve":
