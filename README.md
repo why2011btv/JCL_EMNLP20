@@ -84,6 +84,9 @@ Output will also be a json file under [output](https://github.com/why2011btv/Joi
 #### Command for predicting subevent relations
 `python predict.py example/subevent_example_input.json subevent Joint`
 
+#### [Link to pre-trained model](https://drive.google.com/drive/folders/1PyNAlNHY144pGsko9iYxwYlqf4ud0Lq1?usp=sharing)
+
+
 ## Reference
 Bibtex:
 ```
