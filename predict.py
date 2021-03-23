@@ -20,8 +20,9 @@ import json
 
 ### Read command line parameters ###
 if len(sys.argv) > 1:
-    input_file, task, dataset = sys.argv[1], sys.argv[2], sys.argv[3]
+    input_file, task, dataset, f_out = sys.argv[1], sys.argv[2], sys.argv[3]
     
+f_out = "output/predict_" + task + ".json"
 if dataset == "Joint":
     rst_file_name = "0322_1.rst" # Suggested for subevent
 elif dataset == "HiEve":
@@ -66,12 +67,13 @@ else:
     print("loading model from " + HiEve_best_PATH + "...")
 model = roberta_mlp(num_classes, dataset, add_loss, params)
 model.to(cuda)
+
 if task == "temporal":
     exp = exp(cuda, model, epochs, params['learning_rate'], None, None, test_dataloader, None, None, finetune, dataset, MATRES_best_PATH, None, None, model_name)
-    exp.evaluate(eval_data = "MATRES", test = True, predict = "output/predict_" + task + ".json")
+    exp.evaluate(eval_data = "MATRES", test = True, predict = f_out)
 elif task == "subevent":
     exp = exp(cuda, model, epochs, params['learning_rate'], None, None, None, None, test_dataloader, finetune, dataset, None, HiEve_best_PATH, None, model_name)
-    exp.evaluate(eval_data = "HiEve", test = True, predict = "output/predict_" + task + ".json")
+    exp.evaluate(eval_data = "HiEve", test = True, predict = f_out)
 else:
     # HiEve test set
     train_dataloader, valid_dataloader_MATRES, test_dataloader_MATRES, valid_dataloader_HIEVE, test_dataloader_HIEVE, num_classes = data("HiEve", debugging, params['downsample'], batch_size)
