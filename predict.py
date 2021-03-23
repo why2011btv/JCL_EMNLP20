@@ -19,12 +19,11 @@ from data import *
 import json
 
 task = "subevent" # OR "temporal"
-dataset = "Joint" # OR "MATRES", "HiEve"
 ### Read command line parameters ###
 if len(sys.argv) > 1:
     input_file, task, dataset = sys.argv[1], sys.argv[2], sys.argv[3]
     
-dataset = "Joint"
+dataset = "Joint" # OR "MATRES", "HiEve"
 rst_file_name = "0321_0.rst"
 """
 Old version, not suggested
@@ -35,6 +34,7 @@ elif dataset == "HiEve":
 elif dataset == "MATRES":
     rst_file_name = "0104_3.rst" # Suggested for temporal
 """    
+
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 cuda = torch.device('cuda')
 epochs = 1
