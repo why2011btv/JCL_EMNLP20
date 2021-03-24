@@ -73,6 +73,7 @@ class exp:
         self.model_name = model_name
         self.best_epoch = 0
         #self.file = open("./rst_file/" + model_name + ".rst", "w")
+        print("calling exp_nowrite...")
         
     def my_func(self, x_sent):
         my_list = []
