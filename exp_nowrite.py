@@ -4,6 +4,7 @@ import datetime
 import random
 import numpy as np
 from document_reader import *
+import os
 from os import listdir
 from os.path import isfile, join
 from EventDataset import EventDataset
@@ -22,6 +23,7 @@ from json import JSONEncoder
 import notify
 from notify_message import *
 from notify_smtp import *
+from util import *
 
 class NumpyArrayEncoder(JSONEncoder):
     def default(self, obj):
@@ -29,16 +31,7 @@ class NumpyArrayEncoder(JSONEncoder):
             return obj.tolist()
         return JSONEncoder.default(self, obj)
     
-def format_time(elapsed):
-    '''
-    Takes a time in seconds and returns a string hh:mm:ss
-    '''
-    # Round to the nearest second.
-    elapsed_rounded = int(round((elapsed)))
-    # Format as hh:mm:ss
-    return str(datetime.timedelta(seconds=elapsed_rounded))
-    
-class exp:
+class exp_nowrite:
     def __init__(self, cuda, model, epochs, learning_rate, train_dataloader, valid_dataloader_MATRES, test_dataloader_MATRES, valid_dataloader_HIEVE, test_dataloader_HIEVE, finetune, dataset, MATRES_best_PATH, HiEve_best_PATH, load_model_path, model_name = None, roberta_size = "roberta-base"):
         self.cuda = cuda
         self.model = model
@@ -73,6 +66,7 @@ class exp:
         self.model_name = model_name
         self.best_epoch = 0
         #self.file = open("./rst_file/" + model_name + ".rst", "w")
+        #import pdb;pdb.set_trace()
         print("calling exp_nowrite...")
         
     def my_func(self, x_sent):
@@ -249,7 +243,7 @@ class exp:
                     numpyData = {"labels": "0 -- Parent-Child; 1 -- Child-Parent; 2 -- Coref; 3 -- NoRel", "array": y_logits}
                 json.dump(numpyData, outfile, cls=NumpyArrayEncoder)
             msg = message(subject=eval_data + " Prediction Notice",
-                          text=self.dataset + "/" + self.model_name + " Predicted " + str(y_logits.shape[0] - 1) + " instances")
+                          text=self.dataset + "/" + self.model_name + " Predicted " + str(y_logits.shape[0] - 1) + " instances. (Current Path: " + os.getcwd() + ")")
             send(msg)  # and send it
             return 0
         
@@ -266,7 +260,7 @@ class exp:
                 #print("  Confusion Matrix", file = self.file)
                 #print(CM, file = self.file)
                 msg = message(subject=eval_data + " Test Notice",
-                          text = self.dataset + "/" + self.model_name + " Test results:\n" + "  P: {0:.3f}\n".format(P) + "  R: {0:.3f}\n".format(R) + "  F1: {0:.3f}".format(F1))
+                          text = self.dataset + "/" + self.model_name + " Test results:\n" + "  P: {0:.3f}\n".format(P) + "  R: {0:.3f}\n".format(R) + "  F1: {0:.3f}".format(F1) + " (Current Path: " + os.getcwd() + ")")
                 send(msg)  # and send it
             if not test:
                 if F1 > self.MATRES_best_micro_F1 or path.exists(self.MATRES_best_PATH) == False:
@@ -291,7 +285,7 @@ class exp:
                 #print("  rst:", file = self.file)
                 #print(rst, file = self.file)
                 #print("  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg), file = self.file)
-                msg = message(subject=eval_data + " Test Notice", text = self.dataset + "/" + self.model_name + " Test results:\n" + "  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg))
+                msg = message(subject=eval_data + " Test Notice", text = self.dataset + "/" + self.model_name + " Test results:\n" + "  F1_PC_CP_avg: {0:.3f}".format(F1_PC_CP_avg) + " (Current Path: " + os.getcwd() + ")")
                 send(msg)  # and send it
             if not test:
                 if F1_PC_CP_avg > self.HiEve_best_F1 or path.exists(self.HiEve_best_PATH) == False:

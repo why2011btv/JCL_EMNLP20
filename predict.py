@@ -35,7 +35,7 @@ cuda = torch.device('cuda')
 epochs = 1
 params = {'learning_rate': 0.0000001, 'downsample': 0.01, 'roberta_hidden_size': 1024, 'MLP_size': 512}
 debugging = 0
-batch_size = 16
+batch_size = 64
 add_loss = 1
 finetune = 1
 model_params_dir = "./model_params/"
@@ -69,13 +69,13 @@ model = roberta_mlp(num_classes, dataset, add_loss, params)
 model.to(cuda)
 
 if task == "temporal":
-    exp = exp(cuda, model, epochs, params['learning_rate'], None, None, test_dataloader, None, None, finetune, dataset, MATRES_best_PATH, None, None, model_name)
+    exp = exp_nowrite(cuda, model, epochs, params['learning_rate'], None, None, test_dataloader, None, None, finetune, dataset, MATRES_best_PATH, None, None, model_name)
     exp.evaluate(eval_data = "MATRES", test = True, predict = f_out)
 elif task == "subevent":
-    exp = exp(cuda, model, epochs, params['learning_rate'], None, None, None, None, test_dataloader, finetune, dataset, None, HiEve_best_PATH, None, model_name)
+    exp = exp_nowrite(cuda, model, epochs, params['learning_rate'], None, None, None, None, test_dataloader, finetune, dataset, None, HiEve_best_PATH, None, model_name)
     exp.evaluate(eval_data = "HiEve", test = True, predict = f_out)
 else:
     # HiEve test set
     train_dataloader, valid_dataloader_MATRES, test_dataloader_MATRES, valid_dataloader_HIEVE, test_dataloader_HIEVE, num_classes = data("HiEve", debugging, params['downsample'], batch_size)
-    exp = exp(cuda, model, epochs, params['learning_rate'], train_dataloader, None, None, valid_dataloader_HIEVE, test_dataloader_HIEVE, finetune, "Joint", None, HiEve_best_PATH, None, model_name)
+    exp = exp_nowrite(cuda, model, epochs, params['learning_rate'], train_dataloader, None, None, valid_dataloader_HIEVE, test_dataloader_HIEVE, finetune, "Joint", None, HiEve_best_PATH, None, model_name)
     exp.evaluate(eval_data = "HiEve", test = True)

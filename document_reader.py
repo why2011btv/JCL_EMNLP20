@@ -43,7 +43,7 @@ def num_to_label(num):
     return num_dict[num]
 
 # Padding function
-def padding(sent, pos = False, max_sent_len = 120):
+def padding(sent, pos = False, max_sent_len = 512):
     if pos == False:
         one_list = [1] * max_sent_len
         one_list[0:len(sent)] = sent

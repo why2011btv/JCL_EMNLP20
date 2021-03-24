@@ -14,7 +14,7 @@ from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data import Dataset, DataLoader
 from model import *
 from metric import metric, CM_metric
-from exp import *
+from util import *
 import pickle
 random.seed(10)
 

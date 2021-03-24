@@ -16,6 +16,7 @@ from model import *
 from metric import metric, CM_metric
 from exp import *
 from data import *
+from util import *
 import json
 
 torch.manual_seed(42)
