@@ -4,3 +4,5 @@ rst_file/*
 output_redirect/*
 hyperopt_results/*
 .ipynb_checkpoints/*
+hievents_v2/processed/**
+!hievents_v2/processed/*.tsvx
