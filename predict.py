@@ -14,7 +14,7 @@ from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data import Dataset, DataLoader
 from model import *
 from metric import metric, CM_metric
-from exp import *
+from exp_nowrite import *
 from data import *
 import json
 
