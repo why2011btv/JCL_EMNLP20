@@ -9,3 +9,4 @@ hievents_v2/processed/**
 output/*
 !output/predict_subevent.json
 !output/predict_temporal.json
+example/input_data.json
